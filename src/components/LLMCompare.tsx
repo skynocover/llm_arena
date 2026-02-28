@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, type CSSProperties } from 'react';
 import {
   BarChart,
   Bar,
@@ -20,7 +20,7 @@ import {
 } from 'recharts';
 import { Check, ChevronDown, Sun, Moon, X, Search } from 'lucide-react';
 import MODELS from '../data/models.json';
-import { useTheme } from '../context/useTheme.js';
+import { useTheme } from '../context/useTheme';
 import {
   PRESETS,
   PROVIDERS,
@@ -32,9 +32,12 @@ import {
   DEFAULT_SELECTED,
   fmt,
   fmtPrice,
-} from '../data/constants.js';
+} from '../data/constants';
+import type { Model, BenchmarkKey, SortableField, SortDir, Theme, TierKey } from '../types/model';
 
-const Checkbox = ({ checked, color }) => (
+const typedModels = MODELS as Model[];
+
+const Checkbox = ({ checked, color }: { checked: boolean; color?: string }) => (
   <div
     className="w-4.5 h-4.5 rounded-sm flex items-center justify-center shrink-0 cursor-pointer transition-all duration-150"
     style={{
@@ -46,17 +49,17 @@ const Checkbox = ({ checked, color }) => (
   </div>
 );
 
-const ChevronIcon = ({ collapsed }) => (
+const ChevronIcon = ({ collapsed }: { collapsed: boolean }) => (
   <ChevronDown
     size={14}
     className={`transition-transform duration-200 text-text-muted ${collapsed ? '-rotate-90' : ''}`}
   />
 );
 
-const ASC_FIELDS_TABLE = new Set(['input', 'output', 'latency']);
-const ASC_FIELDS_POOL = new Set(['input', 'output']);
+const ASC_FIELDS_TABLE = new Set<string>(['input', 'output', 'latency']);
+const ASC_FIELDS_POOL = new Set<string>(['input', 'output']);
 
-const ThemeToggle = ({ theme, toggleTheme }) => (
+const ThemeToggle = ({ theme, toggleTheme }: { theme: Theme; toggleTheme: () => void }) => (
   <button
     onClick={toggleTheme}
     className="w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer transition-all duration-200 border border-border-default text-text-secondary hover:border-border-hover hover:text-text-primary bg-transparent ml-2"
@@ -66,9 +69,11 @@ const ThemeToggle = ({ theme, toggleTheme }) => (
   </button>
 );
 
-export default function LLMCompare() {
+type ChartType = 'benchmarks' | 'radar' | 'scatter';
+
+const LLMCompare = () => {
   const { theme, toggleTheme, chartColors } = useTheme();
-  const tooltipStyle = {
+  const tooltipStyle: CSSProperties = {
     background: chartColors.tooltipBg,
     border: `1px solid ${chartColors.tooltipBorder}`,
     borderRadius: 8,
@@ -76,29 +81,29 @@ export default function LLMCompare() {
     fontSize: 12,
     color: chartColors.textPrimary,
   };
-  const [selected, setSelected] = useState(() => {
+  const [selected, setSelected] = useState<string[]>(() => {
     const params = new URLSearchParams(window.location.search);
     const modelsParam = params.get('models');
     if (modelsParam) {
-      const validIds = new Set(MODELS.map((m) => m.id));
+      const validIds = new Set(typedModels.map((m) => m.id));
       const ids = modelsParam.split(',').filter((id) => validIds.has(id));
       return ids.length > 0 ? ids : DEFAULT_SELECTED;
     }
     return DEFAULT_SELECTED;
   });
   const [searchQuery, setSearchQuery] = useState('');
-  const [providerFilter, setProviderFilter] = useState(null);
-  const [tierFilter, setTierFilter] = useState(null);
-  const [sortBy, setSortBy] = useState(null);
-  const [sortDir, setSortDir] = useState('asc');
-  const [expandedChart, setExpandedChart] = useState(null);
+  const [providerFilter, setProviderFilter] = useState<string | null>(null);
+  const [tierFilter, setTierFilter] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<SortableField | null>(null);
+  const [sortDir, setSortDir] = useState<SortDir>('asc');
+  const [expandedChart, setExpandedChart] = useState<ChartType | null>(null);
 
   const [poolCollapsed, setPoolCollapsed] = useState(false);
-  const [poolSortBy, setPoolSortBy] = useState(null);
-  const [poolSortDir, setPoolSortDir] = useState('asc');
+  const [poolSortBy, setPoolSortBy] = useState<SortableField | null>(null);
+  const [poolSortDir, setPoolSortDir] = useState<SortDir>('asc');
 
   useEffect(() => {
-    const url = new URL(window.location);
+    const url = new URL(window.location.href);
     if (selected.length === 0) {
       url.searchParams.delete('models');
     } else {
@@ -107,20 +112,22 @@ export default function LLMCompare() {
     window.history.replaceState(null, '', url);
   }, [selected]);
 
-  const toggleModel = (id) => {
+  const toggleModel = (id: string) => {
     setSelected((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
   };
 
-  const toggleChart = (chart) => setExpandedChart((prev) => (prev === chart ? null : chart));
+  const toggleChart = (chart: ChartType) =>
+    setExpandedChart((prev) => (prev === chart ? null : chart));
 
-  const getModelColor = (id) => MODEL_COLORS[selected.indexOf(id) % MODEL_COLORS.length];
+  const getModelColor = (id: string) => MODEL_COLORS[selected.indexOf(id) % MODEL_COLORS.length]!;
 
   const selectedModels = useMemo(() => {
-    let models = MODELS.filter((m) => selected.includes(m.id));
+    const models = typedModels.filter((m) => selected.includes(m.id));
     if (sortBy) {
+      const key = sortBy;
       models.sort((a, b) => {
-        const va = a[sortBy] ?? -Infinity;
-        const vb = b[sortBy] ?? -Infinity;
+        const va = (a[key] as number | null) ?? -Infinity;
+        const vb = (b[key] as number | null) ?? -Infinity;
         return sortDir === 'asc' ? va - vb : vb - va;
       });
     }
@@ -128,7 +135,7 @@ export default function LLMCompare() {
   }, [selected, sortBy, sortDir]);
 
   const poolModels = useMemo(() => {
-    let list = MODELS;
+    let list: Model[] = typedModels;
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
       list = list.filter(
@@ -138,22 +145,30 @@ export default function LLMCompare() {
     if (providerFilter) list = list.filter((m) => m.provider === providerFilter);
     if (tierFilter) list = list.filter((m) => m.tier === tierFilter);
     if (poolSortBy) {
+      const key = poolSortBy;
       list = [...list].sort((a, b) => {
-        const va = a[poolSortBy] ?? -Infinity;
-        const vb = b[poolSortBy] ?? -Infinity;
+        const va = (a[key] as number | null) ?? -Infinity;
+        const vb = (b[key] as number | null) ?? -Infinity;
         return poolSortDir === 'asc' ? va - vb : vb - va;
       });
     }
     return list;
   }, [searchQuery, providerFilter, tierFilter, poolSortBy, poolSortDir]);
 
-  const makeSortHandler = (currentKey, setKey, setDir, ascFields) => (key) => {
-    if (currentKey === key) setDir((d) => (d === 'asc' ? 'desc' : 'asc'));
-    else {
-      setKey(key);
-      setDir(ascFields.has(key) ? 'asc' : 'desc');
-    }
-  };
+  const makeSortHandler =
+    (
+      currentKey: SortableField | null,
+      setKey: React.Dispatch<React.SetStateAction<SortableField | null>>,
+      setDir: React.Dispatch<React.SetStateAction<SortDir>>,
+      ascFields: Set<string>,
+    ) =>
+    (key: SortableField) => {
+      if (currentKey === key) setDir((d) => (d === 'asc' ? 'desc' : 'asc'));
+      else {
+        setKey(key);
+        setDir(ascFields.has(key) ? 'asc' : 'desc');
+      }
+    };
 
   const handleSort = makeSortHandler(sortBy, setSortBy, setSortDir, ASC_FIELDS_TABLE);
   const handlePoolSort = makeSortHandler(
@@ -164,19 +179,25 @@ export default function LLMCompare() {
   );
 
   const bestValues = useMemo(() => {
-    const fields = [
+    const fields: [string, 'min' | 'max'][] = [
       ['input', 'min'],
       ['output', 'min'],
       ['context', 'max'],
       ['speed', 'max'],
       ['latency', 'min'],
       ['quality', 'max'],
-      ...BENCHMARKS.map((b) => [b, 'max']),
+      ...BENCHMARKS.map((b): [string, 'min' | 'max'] => [b, 'max']),
     ];
-    const result = {};
+    const result: Record<string, number | null> = {};
     fields.forEach(([field, mode]) => {
-      const vals = selectedModels.map((x) => x[field]).filter((x) => x != null);
-      result[field] = vals.length ? (mode === 'max' ? Math.max(...vals) : Math.min(...vals)) : null;
+      const vals = selectedModels
+        .map((x) => x[field!] as number | null)
+        .filter((x): x is number => x != null);
+      result[field!] = vals.length
+        ? mode === 'max'
+          ? Math.max(...vals)
+          : Math.min(...vals)
+        : null;
     });
     return result;
   }, [selectedModels]);
@@ -184,9 +205,12 @@ export default function LLMCompare() {
   const benchmarkData = useMemo(
     () =>
       BENCHMARKS.map((b) => {
-        const entry = { name: BENCH_LABELS[b], key: b };
+        const entry: Record<string, string | number | undefined> = {
+          name: BENCH_LABELS[b],
+          key: b,
+        };
         selectedModels.forEach((m) => {
-          entry[m.id] = m[b];
+          entry[m.id] = m[b] as number;
         });
         return entry;
       }),
@@ -194,7 +218,7 @@ export default function LLMCompare() {
   );
 
   const thumbBenchmarkData = useMemo(
-    () => benchmarkData.filter((d) => THUMB_BENCHMARKS.includes(d.key)),
+    () => benchmarkData.filter((d) => THUMB_BENCHMARKS.includes(d['key'] as BenchmarkKey)),
     [benchmarkData],
   );
 
@@ -205,16 +229,19 @@ export default function LLMCompare() {
         x: (m.input * 3 + m.output) / 4,
         y: m.quality,
         z: m.speed,
-        color: MODEL_COLORS[selected.indexOf(m.id) % MODEL_COLORS.length],
+        color: MODEL_COLORS[selected.indexOf(m.id) % MODEL_COLORS.length]!,
         provider: m.provider,
       })),
     [selectedModels, selected],
   );
 
-  const makeSortIcon = (currentKey, currentDir) => (field) => {
-    if (currentKey !== field) return <span className="opacity-30 text-[10px]">⇅</span>;
-    return <span className="text-[10px] text-rose-accent">{currentDir === 'asc' ? '↑' : '↓'}</span>;
-  };
+  const makeSortIcon =
+    (currentKey: SortableField | null, currentDir: SortDir) => (field: string) => {
+      if (currentKey !== field) return <span className="opacity-30 text-[10px]">⇅</span>;
+      return (
+        <span className="text-[10px] text-rose-accent">{currentDir === 'asc' ? '↑' : '↓'}</span>
+      );
+    };
 
   const sortIcon = makeSortIcon(sortBy, sortDir);
   const poolSortIcon = makeSortIcon(poolSortBy, poolSortDir);
@@ -310,14 +337,16 @@ export default function LLMCompare() {
                     <th className="px-3 py-2.5 text-left text-[10px] font-semibold tracking-[1.5px] uppercase text-text-muted select-none whitespace-nowrap min-w-35">
                       Model
                     </th>
-                    {[
-                      ['context', 'Context'],
-                      ['input', 'Input $/M'],
-                      ['output', 'Output $/M'],
-                      ['speed', 'Speed'],
-                      ['latency', 'TTFT'],
-                      ['quality', 'Quality'],
-                    ].map(([key, label]) => (
+                    {(
+                      [
+                        ['context', 'Context'],
+                        ['input', 'Input $/M'],
+                        ['output', 'Output $/M'],
+                        ['speed', 'Speed'],
+                        ['latency', 'TTFT'],
+                        ['quality', 'Quality'],
+                      ] as const
+                    ).map(([key, label]) => (
                       <th
                         key={key}
                         onClick={() => handleSort(key)}
@@ -372,41 +401,41 @@ export default function LLMCompare() {
                         </div>
                       </td>
                       <td
-                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.context === bestValues.context ? 'text-metric-best font-semibold' : ''}`}
+                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.context === bestValues['context'] ? 'text-metric-best font-semibold' : ''}`}
                       >
                         {fmt(m.context)}
                       </td>
                       <td
-                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.input === bestValues.input ? 'text-metric-best font-semibold' : ''}`}
+                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.input === bestValues['input'] ? 'text-metric-best font-semibold' : ''}`}
                       >
                         {fmtPrice(m.input)}
                       </td>
                       <td
-                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.output === bestValues.output ? 'text-metric-best font-semibold' : ''}`}
+                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.output === bestValues['output'] ? 'text-metric-best font-semibold' : ''}`}
                       >
                         {fmtPrice(m.output)}
                       </td>
                       <td
-                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.speed === bestValues.speed ? 'text-metric-best font-semibold' : ''}`}
+                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.speed === bestValues['speed'] ? 'text-metric-best font-semibold' : ''}`}
                       >
                         {m.speed} t/s
                       </td>
                       <td
-                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.latency === bestValues.latency ? 'text-metric-best font-semibold' : ''}`}
+                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.latency === bestValues['latency'] ? 'text-metric-best font-semibold' : ''}`}
                       >
                         {m.latency}s
                       </td>
                       <td
-                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap font-semibold ${m.quality === bestValues.quality ? 'text-metric-best' : ''}`}
+                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap font-semibold ${m.quality === bestValues['quality'] ? 'text-metric-best' : ''}`}
                       >
                         {m.quality}
                       </td>
                       {BENCHMARKS.map((b) => (
                         <td
                           key={b}
-                          className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m[b] === bestValues[b] ? 'text-metric-best font-semibold' : ''}`}
+                          className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${(m[b] as number) === bestValues[b] ? 'text-metric-best font-semibold' : ''}`}
                         >
-                          {m[b] ?? '—'}
+                          {(m[b] as number | null) ?? '—'}
                         </td>
                       ))}
                     </tr>
@@ -502,7 +531,7 @@ export default function LLMCompare() {
                     tickLine={false}
                     scale="log"
                     domain={['auto', 'auto']}
-                    tickFormatter={(v) => v.toFixed(1)}
+                    tickFormatter={(v: number) => v.toFixed(1)}
                   />
                   <YAxis
                     type="number"
@@ -510,7 +539,7 @@ export default function LLMCompare() {
                     tick={{ fill: chartColors.tick, fontSize: 10 }}
                     axisLine={{ stroke: chartColors.grid }}
                     tickLine={false}
-                    tickFormatter={(v) => v.toFixed(1)}
+                    tickFormatter={(v: number) => v.toFixed(1)}
                   />
                   <ZAxis type="number" dataKey="z" range={[80, 300]} />
                   <Scatter data={scatterData}>
@@ -682,7 +711,7 @@ export default function LLMCompare() {
                 <Tooltip
                   cursor={{ strokeDasharray: '3 3', stroke: chartColors.cursor }}
                   contentStyle={tooltipStyle}
-                  formatter={(val, name) =>
+                  formatter={(val: number, name: string) =>
                     name === 'Price'
                       ? `$${val.toFixed(2)}/M`
                       : name === 'Quality'
@@ -716,7 +745,7 @@ export default function LLMCompare() {
             <div className="flex items-center gap-2">
               <ChevronIcon collapsed={poolCollapsed} />
               <span className="font-display text-[14px] font-semibold">Model Pool</span>
-              <span className="text-[12px] text-text-muted">({MODELS.length} models)</span>
+              <span className="text-[12px] text-text-muted">({typedModels.length} models)</span>
             </div>
             {selected.length > 0 && (
               <span className="text-[11px] text-text-dim font-mono">
@@ -772,7 +801,7 @@ export default function LLMCompare() {
                     </button>
                   ))}
                   <span className="w-px h-4 bg-border-default mx-1" />
-                  {Object.entries(TIERS).map(([k, v]) => (
+                  {(Object.entries(TIERS) as [TierKey, (typeof TIERS)[TierKey]][]).map(([k, v]) => (
                     <button
                       key={k}
                       onClick={() => setTierFilter(tierFilter === k ? null : k)}
@@ -906,4 +935,6 @@ export default function LLMCompare() {
       </div>
     </div>
   );
-}
+};
+
+export default LLMCompare;

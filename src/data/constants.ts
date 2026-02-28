@@ -1,6 +1,7 @@
+import type { BenchmarkKey, Preset, TierInfo, TierKey } from '../types/model';
 import MODELS from './models.json';
 
-export const PRESETS = [
+export const PRESETS: Preset[] = [
   { label: '🏆 Frontier Battle', ids: ['gpt5', 'opus46', 'gemini31pro'] },
   { label: '💰 Best Value', ids: ['sonnet46', 'deepseekr1', 'qwen3235b', 'gpt41'] },
   {
@@ -11,17 +12,17 @@ export const PRESETS = [
   { label: '🇨🇳 vs 🇺🇸', ids: ['deepseekr1', 'qwen3235b', 'gpt5', 'sonnet46'] },
 ];
 
-export const PROVIDERS = [...new Set(MODELS.map((m) => m.provider))];
+export const PROVIDERS: string[] = [...new Set(MODELS.map((m) => m.provider))];
 
-export const TIERS = {
+export const TIERS: Record<TierKey, TierInfo> = {
   frontier: { label: 'Frontier', color: '#f59e0b', icon: '🏆' },
   mid: { label: 'Mid', color: '#6366f1', icon: '⚖️' },
   budget: { label: 'Budget', color: '#10b981', icon: '💰' },
 };
 
-export const BENCHMARKS = ['coding', 'mmlu', 'gpqa', 'math', 'swe', 'aime'];
+export const BENCHMARKS: BenchmarkKey[] = ['coding', 'mmlu', 'gpqa', 'math', 'swe', 'aime'];
 
-export const BENCH_LABELS = {
+export const BENCH_LABELS: Record<BenchmarkKey, string> = {
   coding: 'Coding',
   mmlu: 'MMLU',
   gpqa: 'GPQA',
@@ -30,9 +31,9 @@ export const BENCH_LABELS = {
   aime: 'AIME 2024',
 };
 
-export const THUMB_BENCHMARKS = ['coding', 'mmlu', 'math'];
+export const THUMB_BENCHMARKS: BenchmarkKey[] = ['coding', 'mmlu', 'math'];
 
-export const MODEL_COLORS = [
+export const MODEL_COLORS: string[] = [
   '#f43f5e',
   '#3b82f6',
   '#10b981',
@@ -50,12 +51,13 @@ export const MODEL_COLORS = [
   '#22c55e',
 ];
 
-export const fmt = (n) => {
+export const fmt = (n: number): string => {
   if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
   if (n >= 1000) return (n / 1000).toFixed(0) + 'K';
   return n.toString();
 };
 
-export const fmtPrice = (n) => (n === null ? '—' : n < 0.01 ? '<$0.01' : '$' + n.toFixed(2));
+export const fmtPrice = (n: number | null): string =>
+  n === null ? '—' : n < 0.01 ? '<$0.01' : '$' + n.toFixed(2);
 
-export const DEFAULT_SELECTED = ['gpt5', 'opus46', 'gemini31pro', 'sonnet46'];
+export const DEFAULT_SELECTED: string[] = ['gpt5', 'opus46', 'gemini31pro', 'sonnet46'];

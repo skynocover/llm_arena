@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
-import { ThemeContext } from './themeContext.js';
+import { useState, useEffect, type ReactNode } from 'react';
+import type { ChartColors, Theme } from '../types/model';
+import { ThemeContext } from './createThemeContext';
 
-const LIGHT_CHART = {
+const LIGHT_CHART: ChartColors = {
   grid: '#e5e7eb',
   tick: '#71717a',
   tickDim: '#a1a1aa',
@@ -13,7 +14,7 @@ const LIGHT_CHART = {
   textSecondary: '#52525b',
 };
 
-const DARK_CHART = {
+const DARK_CHART: ChartColors = {
   grid: '#27272a',
   tick: '#71717a',
   tickDim: '#52525b',
@@ -27,8 +28,8 @@ const DARK_CHART = {
 
 const STORAGE_KEY = 'llm-arena-theme';
 
-export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(() => {
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const [theme, setTheme] = useState<Theme>(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
     return stored === 'light' ? 'light' : 'dark';
   });

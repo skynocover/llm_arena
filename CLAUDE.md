@@ -6,11 +6,19 @@ LLM model comparison tool built with React + Vite + Tailwind CSS v4 + Recharts.
 
 ## Stack
 
-- React 19 (Vite dev server, JSX)
+- React 19 + TypeScript (Vite dev server, TSX)
 - Tailwind CSS v4 (CSS-first config via `src/index.css` `@theme` block)
 - Recharts for charts
 - lucide-react for icons
 - pnpm as package manager
+
+## TypeScript
+
+- All source code must be written in TypeScript (`.ts` / `.tsx`)
+- Do not use `any` — use proper types or `unknown` with type guards
+- Shared types live in `src/types/` (e.g., `src/types/model.ts`)
+- Use `interface` for object shapes, `type` for unions/intersections
+- JSON imports are typed via `resolveJsonModule` in tsconfig
 
 ## Critical Rules
 
@@ -32,6 +40,7 @@ LLM model comparison tool built with React + Vite + Tailwind CSS v4 + Recharts.
 - Do not modify dependency versions in `package.json`
 - Do not write custom CSS — use Tailwind only
 - Do not use inline SVG — use `lucide-react`
+- Do not create `.js` / `.jsx` files in `src/` — use `.ts` / `.tsx` only
 
 ## Conventions
 
@@ -46,9 +55,9 @@ LLM model comparison tool built with React + Vite + Tailwind CSS v4 + Recharts.
 
 ### React Fast Refresh
 
-- Component files (`.jsx`) must **only export components** — no constants, utility functions, or data
-- Extract shared constants and helpers to separate files (e.g., `src/data/constants.js`)
-- Hooks go in their own files (e.g., `src/context/useTheme.js`)
+- Component files (`.tsx`) must **only export components** — no constants, utility functions, or data
+- Extract shared constants and helpers to separate files (e.g., `src/data/constants.ts`)
+- Hooks go in their own files (e.g., `src/context/useTheme.ts`)
 
 ### Component Definitions
 
@@ -58,9 +67,10 @@ LLM model comparison tool built with React + Vite + Tailwind CSS v4 + Recharts.
 
 ### File Structure
 
-- `src/components/` — React components (only component exports)
-- `src/data/` — JSON data and shared constants
-- `src/context/` — React context providers + hooks (separate files)
+- `src/components/` — React components (`.tsx`, only component exports)
+- `src/data/` — JSON data and shared constants (`.ts`)
+- `src/context/` — React context providers + hooks (separate files, `.ts` / `.tsx`)
+- `src/types/` — Shared TypeScript type definitions (`.ts`)
 
 ### localStorage
 
