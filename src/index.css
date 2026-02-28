@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface-bg: var(--bg);
+  --color-surface-card: var(--card);
+  --color-surface-card-alt: var(--card-alt);
+  --color-border-default: var(--border);
+  --color-border-light: var(--border-light);
+  --color-border-hover: var(--border-hover);
+  --color-border-active: var(--border-active);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-dim: var(--text-dim);
+  --color-text-inverse: var(--text-inverse);
+  --color-rose-accent: #f43f5e;
+  --color-metric-best: #10b981;
+  --color-tier-frontier: #f59e0b;
+  --color-tier-mid: #6366f1;
+  --color-tier-budget: #10b981;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+  --font-display: 'Space Grotesk', sans-serif;
+  --animate-fade-in: fade-in 0.25s ease-out;
+  --animate-slide-in: slide-in 0.3s ease-out;
+}
+
+/* Light mode (default) */
+:root {
+  --bg: #f8f8fa;
+  --card: #ffffff;
+  --card-alt: #f3f4f6;
+  --border: #e5e7eb;
+  --border-light: #f0f0f2;
+  --border-hover: #d1d5db;
+  --border-active: #9ca3af;
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --text-muted: #71717a;
+  --text-dim: #a1a1aa;
+  --text-inverse: #e4e4e7;
+  --hover-overlay: rgba(0, 0, 0, 0.04);
+  --checkbox-border: #d1d5db;
+}
+
+/* Dark mode */
+:root.dark {
+  --bg: #0a0a0f;
+  --card: #18181b;
+  --card-alt: #111114;
+  --border: #27272a;
+  --border-light: #1f1f23;
+  --border-hover: #3f3f46;
+  --border-active: #52525b;
+  --text-primary: #e4e4e7;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --text-dim: #52525b;
+  --text-inverse: #18181b;
+  --hover-overlay: rgba(255, 255, 255, 0.03);
+  --checkbox-border: #3f3f46;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+html {
+  line-height: normal;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+}
+
+::-webkit-scrollbar { height: 6px; width: 6px; }
+::-webkit-scrollbar-track { background: var(--card); }
+::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-active); }
