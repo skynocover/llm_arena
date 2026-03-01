@@ -85,19 +85,42 @@ export const fmt = (n: number): string => {
 export const fmtPrice = (n: number | null): string =>
   n === null ? '—' : n < 0.01 ? '<$0.01' : '$' + n.toFixed(2);
 
-export const DATA_SOURCES: Record<SortableField, string> = {
-  context: 'OpenRouter',
-  input: 'OpenRouter',
-  output: 'OpenRouter',
-  speed: 'Artificial Analysis',
-  latency: 'Artificial Analysis',
-  quality: 'Artificial Analysis Quality Index',
-  coding: 'LiveCodeBench',
-  mmlu: 'MMLU-Pro',
-  gpqa: 'GPQA Diamond',
-  math: 'MATH-500',
-  swe: 'SWE-Bench Verified',
-  aime: 'AIME 2025',
+export const DATA_SOURCES: Record<SortableField, { source: string; desc: string }> = {
+  context: { source: 'OpenRouter', desc: 'Max context window length' },
+  input: { source: 'OpenRouter', desc: 'Cost per 1M input tokens' },
+  output: { source: 'OpenRouter', desc: 'Cost per 1M output tokens' },
+  speed: { source: 'Artificial Analysis', desc: 'Output speed (tokens/sec)' },
+  latency: { source: 'Artificial Analysis', desc: 'Time To First Token' },
+  quality: { source: 'Artificial Analysis', desc: 'Overall quality index' },
+  coding: { source: 'LiveCodeBench', desc: 'Code generation & problem solving' },
+  mmlu: { source: 'MMLU-Pro', desc: 'Multi-discipline knowledge (57 subjects)' },
+  gpqa: { source: 'GPQA Diamond', desc: 'Graduate-level science Q&A' },
+  math: { source: 'MATH-500', desc: 'Math problem solving' },
+  swe: { source: 'SWE-Bench Verified', desc: 'Real-world GitHub bug fixing' },
+  aime: { source: 'AIME 2025', desc: 'Competition-level math problems' },
 };
+
+export const OPEN_SOURCE_IDS = new Set<string>([
+  'deepseekv3',
+  'deepseekv32s',
+  'deepseekr1',
+  'deepseekr10528',
+  'qwen35397b',
+  'qwen3max',
+  'qwen3235b',
+  'qwen35flash',
+  'qwen3coder',
+  'llama4maverick',
+  'llama4scout',
+  'mistrallarge3',
+  'mistralmedium31',
+  'mistralsmall3',
+  'devstral2',
+  'phi4',
+  'gemma327b',
+  'glm5',
+  'glm47flash',
+  'gptoss20b',
+]);
 
 export const DEFAULT_SELECTED: string[] = ['gpt5', 'opus46', 'gemini31pro', 'sonnet46'];

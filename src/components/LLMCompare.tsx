@@ -32,6 +32,7 @@ import {
   BENCH_LABELS,
   THUMB_BENCHMARKS,
   MODEL_COLORS,
+  OPEN_SOURCE_IDS,
   DEFAULT_SELECTED,
   fmt,
   fmtPrice,
@@ -61,6 +62,13 @@ const ChevronIcon = ({ collapsed }: { collapsed: boolean }) => (
 
 const ASC_FIELDS_TABLE = new Set<string>(['input', 'output', 'latency']);
 const ASC_FIELDS_POOL = new Set<string>(['input', 'output']);
+
+const ossBadge = (id: string) =>
+  OPEN_SOURCE_IDS.has(id) ? (
+    <span className="text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-500">
+      OSS
+    </span>
+  ) : null;
 
 const ThemeToggle = ({ theme, toggleTheme }: { theme: Theme; toggleTheme: () => void }) => (
   <button
@@ -97,6 +105,7 @@ const LLMCompare = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [providerFilter, setProviderFilter] = useState<string | null>(null);
   const [tierFilter, setTierFilter] = useState<string | null>(null);
+  const [ossFilter, setOssFilter] = useState(false);
   const [sortBy, setSortBy] = useState<SortableField | null>(null);
   const [sortDir, setSortDir] = useState<SortDir>('asc');
   const [expandedChart, setExpandedChart] = useState<ChartType | null>(null);
@@ -147,6 +156,7 @@ const LLMCompare = () => {
     }
     if (providerFilter) list = list.filter((m) => m.provider === providerFilter);
     if (tierFilter) list = list.filter((m) => m.tier === tierFilter);
+    if (ossFilter) list = list.filter((m) => OPEN_SOURCE_IDS.has(m.id));
     if (poolSortBy) {
       const key = poolSortBy;
       list = [...list].sort((a, b) => {
@@ -156,7 +166,7 @@ const LLMCompare = () => {
       });
     }
     return list;
-  }, [searchQuery, providerFilter, tierFilter, poolSortBy, poolSortDir]);
+  }, [searchQuery, providerFilter, tierFilter, ossFilter, poolSortBy, poolSortDir]);
 
   const makeSortHandler =
     (
@@ -237,6 +247,15 @@ const LLMCompare = () => {
       })),
     [selectedModels, selected],
   );
+
+  const priceTicks = useMemo(() => {
+    if (scatterData.length === 0) return [];
+    const prices = scatterData.map((d) => d.x);
+    const min = Math.min(...prices);
+    const max = Math.max(...prices);
+    const steps = [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100];
+    return steps.filter((s) => s >= min * 0.8 && s <= max * 1.2);
+  }, [scatterData]);
 
   const makeSortIcon =
     (currentKey: SortableField | null, currentDir: SortDir) => (field: string) => {
@@ -400,6 +419,7 @@ const LLMCompare = () => {
                             style={{ background: getModelColor(m.id) }}
                           />
                           <span>{m.name}</span>
+                          {ossBadge(m.id)}
                         </div>
                       </td>
                       <td
@@ -533,7 +553,8 @@ const LLMCompare = () => {
                     tickLine={false}
                     scale="log"
                     domain={['auto', 'auto']}
-                    tickFormatter={(v: number) => v.toFixed(1)}
+                    ticks={priceTicks}
+                    tickFormatter={(v: number) => `$${v}`}
                   />
                   <YAxis
                     type="number"
@@ -693,6 +714,8 @@ const LLMCompare = () => {
                   }}
                   scale="log"
                   domain={['auto', 'auto']}
+                  ticks={priceTicks}
+                  tickFormatter={(v: number) => `$${v}`}
                 />
                 <YAxis
                   type="number"
@@ -822,6 +845,18 @@ const LLMCompare = () => {
                       {v.icon} {v.label}
                     </button>
                   ))}
+                  <span className="w-px h-4 bg-border-default mx-1" />
+                  <button
+                    onClick={() => setOssFilter(!ossFilter)}
+                    className={`px-2.5 py-1 rounded-xl text-[10px] font-medium cursor-pointer transition-all duration-150 border font-mono
+                      ${
+                        ossFilter
+                          ? 'border-emerald-500 text-emerald-500 bg-emerald-500/8'
+                          : 'border-border-default text-text-muted bg-transparent hover:border-border-active hover:text-text-secondary'
+                      }`}
+                  >
+                    OSS
+                  </button>
                 </div>
               </div>
 
@@ -901,15 +936,18 @@ const LLMCompare = () => {
                             </div>
                           </td>
                           <td className="px-3 py-2 text-left whitespace-nowrap">
-                            <span
-                              className="text-[12px]"
-                              style={{
-                                fontWeight: isSelected ? 600 : 400,
-                                color: isSelected ? color : 'var(--text-primary)',
-                              }}
-                            >
-                              {m.name}
-                            </span>
+                            <div className="flex items-center gap-1.5">
+                              <span
+                                className="text-[12px]"
+                                style={{
+                                  fontWeight: isSelected ? 600 : 400,
+                                  color: isSelected ? color : 'var(--text-primary)',
+                                }}
+                              >
+                                {m.name}
+                              </span>
+                              {ossBadge(m.id)}
+                            </div>
                           </td>
                           <td className="px-3 py-2 text-left whitespace-nowrap">
                             <span

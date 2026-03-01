@@ -39,10 +39,11 @@ const SourceTooltip = ({ field, children }: SourceTooltipProps) => {
       {pos &&
         createPortal(
           <span
-            className="fixed pointer-events-none px-2 py-1 rounded-md text-[10px] font-medium whitespace-nowrap bg-surface-tooltip text-text-tooltip shadow-sm z-50"
+            className="fixed pointer-events-none px-2.5 py-1.5 rounded-md text-[10px] font-medium whitespace-nowrap bg-surface-tooltip text-text-tooltip shadow-sm z-50 flex flex-col items-center gap-0.5"
             style={{ left: pos.x, top: pos.y - 8, transform: 'translate(-50%, -100%)' }}
           >
-            {DATA_SOURCES[field]}
+            <span>{DATA_SOURCES[field].desc}</span>
+            <span className="opacity-70">{DATA_SOURCES[field].source}</span>
           </span>,
           document.body,
         )}
