@@ -15,12 +15,12 @@ const LIGHT_CHART: ChartColors = {
 };
 
 const DARK_CHART: ChartColors = {
-  grid: '#27272a',
-  tick: '#71717a',
-  tickDim: '#52525b',
+  grid: '#2c2c31',
+  tick: '#8b8b94',
+  tickDim: '#71717a',
   tooltipBg: '#18181b',
-  tooltipBorder: '#27272a',
-  axis: '#27272a',
+  tooltipBorder: '#2c2c31',
+  axis: '#2c2c31',
   cursor: '#3f3f46',
   textPrimary: '#e4e4e7',
   textSecondary: '#a1a1aa',

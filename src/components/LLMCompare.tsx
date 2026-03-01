@@ -259,7 +259,7 @@ const LLMCompare = () => {
 
   const makeSortIcon =
     (currentKey: SortableField | null, currentDir: SortDir) => (field: string) => {
-      if (currentKey !== field) return <span className="opacity-30 text-[10px]">⇅</span>;
+      if (currentKey !== field) return <span className="opacity-40 text-[10px]">⇅</span>;
       return (
         <span className="text-[10px] text-rose-accent">{currentDir === 'asc' ? '↑' : '↓'}</span>
       );
@@ -787,7 +787,7 @@ const LLMCompare = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search models or providers..."
-                    className="w-full bg-transparent border-none outline-none text-text-primary text-[13px] font-mono"
+                    className="w-full bg-transparent border-none outline-none text-text-primary placeholder:text-text-dim text-[13px] font-mono"
                   />
                   {searchQuery && (
                     <button

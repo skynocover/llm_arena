@@ -123,4 +123,4 @@ export const OPEN_SOURCE_IDS = new Set<string>([
   'gptoss20b',
 ]);
 
-export const DEFAULT_SELECTED: string[] = ['gpt5', 'opus46', 'gemini31pro', 'sonnet46'];
+export const DEFAULT_SELECTED: string[] = ['gpt5', 'opus46', 'gemini31pro', 'grok4'];
