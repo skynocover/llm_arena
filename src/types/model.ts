@@ -25,9 +25,9 @@ export interface Model {
 export type BenchmarkKey = 'coding' | 'mmlu' | 'gpqa' | 'math' | 'swe' | 'aime';
 
 export type SortableField =
+  | 'context'
   | 'input'
   | 'output'
-  | 'context'
   | 'speed'
   | 'latency'
   | 'quality'

@@ -1,4 +1,4 @@
-import type { BenchmarkKey, Preset, TierInfo, TierKey } from '../types/model';
+import type { BenchmarkKey, Preset, SortableField, TierInfo, TierKey } from '../types/model';
 import MODELS from './models.json';
 
 export const PRESETS: Preset[] = [
@@ -21,7 +21,14 @@ export const PRESETS: Preset[] = [
   },
 ];
 
-export const PROVIDERS: string[] = [...new Set(MODELS.map((m) => m.provider))];
+const _providerSet = new Set<string>();
+const _providerColors: Record<string, string> = {};
+for (const m of MODELS) {
+  _providerSet.add(m.provider);
+  _providerColors[m.provider] = m.providerColor;
+}
+export const PROVIDERS: string[] = [..._providerSet];
+export const PROVIDER_COLORS: Record<string, string> = _providerColors;
 
 export const TIERS: Record<TierKey, TierInfo> = {
   frontier: { label: 'Frontier', color: '#f59e0b', icon: '🏆' },
@@ -77,5 +84,20 @@ export const fmt = (n: number): string => {
 
 export const fmtPrice = (n: number | null): string =>
   n === null ? '—' : n < 0.01 ? '<$0.01' : '$' + n.toFixed(2);
+
+export const DATA_SOURCES: Record<SortableField, string> = {
+  context: 'OpenRouter',
+  input: 'OpenRouter',
+  output: 'OpenRouter',
+  speed: 'Artificial Analysis',
+  latency: 'Artificial Analysis',
+  quality: 'Artificial Analysis Quality Index',
+  coding: 'LiveCodeBench',
+  mmlu: 'MMLU-Pro',
+  gpqa: 'GPQA Diamond',
+  math: 'MATH-500',
+  swe: 'SWE-Bench Verified',
+  aime: 'AIME 2025',
+};
 
 export const DEFAULT_SELECTED: string[] = ['gpt5', 'opus46', 'gemini31pro', 'sonnet46'];

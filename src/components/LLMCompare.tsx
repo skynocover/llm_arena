@@ -21,9 +21,12 @@ import {
 import { Check, ChevronDown, Sun, Moon, X, Search } from 'lucide-react';
 import MODELS from '../data/models.json';
 import { useTheme } from '../context/useTheme';
+import ProviderIcon from './ProviderIcon';
+import SourceTooltip from './SourceTooltip';
 import {
   PRESETS,
   PROVIDERS,
+  PROVIDER_COLORS,
   TIERS,
   BENCHMARKS,
   BENCH_LABELS,
@@ -352,7 +355,9 @@ const LLMCompare = () => {
                         onClick={() => handleSort(key)}
                         className="px-3 py-2.5 text-right text-[10px] font-semibold tracking-[1.5px] uppercase text-text-muted cursor-pointer select-none whitespace-nowrap transition-colors duration-150 hover:text-text-primary"
                       >
-                        {label} {sortIcon(key)}
+                        <SourceTooltip field={key}>
+                          {label} {sortIcon(key)}
+                        </SourceTooltip>
                       </th>
                     ))}
                     {BENCHMARKS.map((b) => (
@@ -361,7 +366,9 @@ const LLMCompare = () => {
                         onClick={() => handleSort(b)}
                         className="px-3 py-2.5 text-right text-[10px] font-semibold tracking-[1.5px] uppercase text-text-muted cursor-pointer select-none whitespace-nowrap transition-colors duration-150 hover:text-text-primary"
                       >
-                        {BENCH_LABELS[b]} {sortIcon(b)}
+                        <SourceTooltip field={b}>
+                          {BENCH_LABELS[b]} {sortIcon(b)}
+                        </SourceTooltip>
                       </th>
                     ))}
                   </tr>
@@ -382,12 +389,7 @@ const LLMCompare = () => {
                       </td>
                       <td className="px-3 py-2.5 text-left whitespace-nowrap sticky left-0 bg-surface-card z-1">
                         <div className="flex items-center gap-2">
-                          <span
-                            className="w-5 h-5 rounded-full shrink-0 inline-flex items-center justify-center text-[10px] font-bold text-white"
-                            style={{ background: m.providerColor }}
-                          >
-                            {m.provider.charAt(0)}
-                          </span>
+                          <ProviderIcon provider={m.provider} size={18} color={m.providerColor} />
                           <span className="text-[13px] font-semibold">{m.provider}</span>
                         </div>
                       </td>
@@ -790,13 +792,18 @@ const LLMCompare = () => {
                     <button
                       key={p}
                       onClick={() => setProviderFilter(providerFilter === p ? null : p)}
-                      className={`px-2.5 py-1 rounded-xl text-[10px] font-medium cursor-pointer transition-all duration-150 border font-mono
+                      className={`px-2.5 py-1 rounded-xl text-[10px] font-medium cursor-pointer transition-all duration-150 border font-mono flex items-center gap-1
                         ${
                           providerFilter === p
                             ? 'border-rose-accent text-rose-accent bg-rose-accent/8'
                             : 'border-border-default text-text-muted bg-transparent hover:border-border-active hover:text-text-secondary'
                         }`}
                     >
+                      <ProviderIcon
+                        provider={p}
+                        size={12}
+                        color={PROVIDER_COLORS[p] ?? 'currentColor'}
+                      />
                       {p}
                     </button>
                   ))}
@@ -836,25 +843,33 @@ const LLMCompare = () => {
                         onClick={() => handlePoolSort('context')}
                         className="px-3 py-2 text-right text-[10px] font-semibold tracking-[1.5px] uppercase text-text-muted cursor-pointer select-none whitespace-nowrap transition-colors duration-150 hover:text-text-primary"
                       >
-                        Context {poolSortIcon('context')}
+                        <SourceTooltip field="context">
+                          Context {poolSortIcon('context')}
+                        </SourceTooltip>
                       </th>
                       <th
                         onClick={() => handlePoolSort('input')}
                         className="px-3 py-2 text-right text-[10px] font-semibold tracking-[1.5px] uppercase text-text-muted cursor-pointer select-none whitespace-nowrap transition-colors duration-150 hover:text-text-primary"
                       >
-                        Input $/M {poolSortIcon('input')}
+                        <SourceTooltip field="input">
+                          Input $/M {poolSortIcon('input')}
+                        </SourceTooltip>
                       </th>
                       <th
                         onClick={() => handlePoolSort('output')}
                         className="px-3 py-2 text-right text-[10px] font-semibold tracking-[1.5px] uppercase text-text-muted cursor-pointer select-none whitespace-nowrap transition-colors duration-150 hover:text-text-primary"
                       >
-                        Output $/M {poolSortIcon('output')}
+                        <SourceTooltip field="output">
+                          Output $/M {poolSortIcon('output')}
+                        </SourceTooltip>
                       </th>
                       <th
                         onClick={() => handlePoolSort('quality')}
                         className="px-3 py-2 text-right text-[10px] font-semibold tracking-[1.5px] uppercase text-text-muted cursor-pointer select-none whitespace-nowrap transition-colors duration-150 hover:text-text-primary"
                       >
-                        Quality {poolSortIcon('quality')}
+                        <SourceTooltip field="quality">
+                          Quality {poolSortIcon('quality')}
+                        </SourceTooltip>
                       </th>
                     </tr>
                   </thead>
@@ -877,9 +892,10 @@ const LLMCompare = () => {
                           </td>
                           <td className="px-3 py-2 text-left whitespace-nowrap">
                             <div className="flex items-center gap-2">
-                              <span
-                                className="w-2.5 h-2.5 rounded-full shrink-0 inline-block"
-                                style={{ background: m.providerColor }}
+                              <ProviderIcon
+                                provider={m.provider}
+                                size={14}
+                                color={m.providerColor}
                               />
                               <span className="text-[12px]">{m.provider}</span>
                             </div>
