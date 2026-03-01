@@ -818,7 +818,7 @@ const LLMCompare = () => {
                 </div>
               </div>
 
-              <div className="max-h-100 overflow-auto">
+              <div>
                 <table className="w-full border-collapse">
                   <thead>
                     <tr className="border-t border-border-default sticky top-0 bg-surface-card z-1">

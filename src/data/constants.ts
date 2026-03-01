@@ -2,14 +2,23 @@ import type { BenchmarkKey, Preset, TierInfo, TierKey } from '../types/model';
 import MODELS from './models.json';
 
 export const PRESETS: Preset[] = [
-  { label: '🏆 Frontier Battle', ids: ['gpt5', 'opus46', 'gemini31pro'] },
-  { label: '💰 Best Value', ids: ['sonnet46', 'deepseekr1', 'qwen3235b', 'gpt41'] },
+  { label: '🏆 Frontier Battle', ids: ['gpt5', 'opus46', 'gemini31pro', 'glm5'] },
+  {
+    label: '💰 Best Value',
+    ids: ['kimik25', 'minimaxm25', 'doubao20pro', 'deepseekv3'],
+  },
   {
     label: '⚡ Budget Kings',
-    ids: ['gpt4omini', 'gemini25flash', 'haiku45', 'gptoss20b', 'llama4scout'],
+    ids: ['gpt4omini', 'gemini25flash', 'gptoss20b', 'llama4scout', 'mistralsmall3'],
   },
-  { label: '🧠 Coding Focus', ids: ['opus46', 'gpt5', 'deepseekr1', 'gemini31pro', 'sonnet46'] },
-  { label: '🇨🇳 vs 🇺🇸', ids: ['deepseekr1', 'qwen3235b', 'gpt5', 'sonnet46'] },
+  {
+    label: '🧠 Coding Focus',
+    ids: ['kimik25', 'minimaxm25', 'glm5', 'opus46', 'gptoss20b'],
+  },
+  {
+    label: '🇨🇳 vs 🇺🇸',
+    ids: ['glm5', 'kimik25', 'doubao20pro', 'gpt5', 'opus46', 'gemini31pro'],
+  },
 ];
 
 export const PROVIDERS: string[] = [...new Set(MODELS.map((m) => m.provider))];
@@ -28,7 +37,7 @@ export const BENCH_LABELS: Record<BenchmarkKey, string> = {
   gpqa: 'GPQA',
   math: 'MATH 500',
   swe: 'SWE-Bench',
-  aime: 'AIME 2024',
+  aime: 'AIME 2025',
 };
 
 export const THUMB_BENCHMARKS: BenchmarkKey[] = ['coding', 'mmlu', 'math'];
@@ -49,6 +58,15 @@ export const MODEL_COLORS: string[] = [
   '#0ea5e9',
   '#a855f7',
   '#22c55e',
+  '#d946ef',
+  '#0891b2',
+  '#ca8a04',
+  '#dc2626',
+  '#7c3aed',
+  '#059669',
+  '#db2777',
+  '#2563eb',
+  '#65a30d',
 ];
 
 export const fmt = (n: number): string => {
