@@ -34,6 +34,8 @@ import {
   MODEL_COLORS,
   OPEN_SOURCE_IDS,
   DEFAULT_SELECTED,
+  DATA_LAST_UPDATED,
+  NA,
   fmt,
   fmtPrice,
 } from '../data/constants';
@@ -62,6 +64,7 @@ const ChevronIcon = ({ collapsed }: { collapsed: boolean }) => (
 
 const ASC_FIELDS_TABLE = new Set<string>(['input', 'output', 'latency']);
 const ASC_FIELDS_POOL = new Set<string>(['input', 'output']);
+const DEFAULT_SCATTER_SPEED = 50;
 
 const ossBadge = (id: string) =>
   OPEN_SOURCE_IDS.has(id) ? (
@@ -138,8 +141,11 @@ const LLMCompare = () => {
     if (sortBy) {
       const key = sortBy;
       models.sort((a, b) => {
-        const va = (a[key] as number | null) ?? -Infinity;
-        const vb = (b[key] as number | null) ?? -Infinity;
+        const va = a[key] as number | null;
+        const vb = b[key] as number | null;
+        if (va === null && vb === null) return 0;
+        if (va === null) return 1;
+        if (vb === null) return -1;
         return sortDir === 'asc' ? va - vb : vb - va;
       });
     }
@@ -160,8 +166,11 @@ const LLMCompare = () => {
     if (poolSortBy) {
       const key = poolSortBy;
       list = [...list].sort((a, b) => {
-        const va = (a[key] as number | null) ?? -Infinity;
-        const vb = (b[key] as number | null) ?? -Infinity;
+        const va = a[key] as number | null;
+        const vb = b[key] as number | null;
+        if (va === null && vb === null) return 0;
+        if (va === null) return 1;
+        if (vb === null) return -1;
         return poolSortDir === 'asc' ? va - vb : vb - va;
       });
     }
@@ -223,7 +232,8 @@ const LLMCompare = () => {
           key: b,
         };
         selectedModels.forEach((m) => {
-          entry[m.id] = m[b] as number;
+          const val = m[b] as number | null;
+          if (val !== null) entry[m.id] = val;
         });
         return entry;
       }),
@@ -237,14 +247,16 @@ const LLMCompare = () => {
 
   const scatterData = useMemo(
     () =>
-      selectedModels.map((m) => ({
-        name: m.name,
-        x: (m.input * 3 + m.output) / 4,
-        y: m.quality,
-        z: m.speed,
-        color: MODEL_COLORS[selected.indexOf(m.id) % MODEL_COLORS.length]!,
-        provider: m.provider,
-      })),
+      selectedModels
+        .filter((m) => m.input !== null && m.output !== null && m.quality !== null)
+        .map((m) => ({
+          name: m.name,
+          x: (m.input! * 3 + m.output!) / 4,
+          y: m.quality!,
+          z: m.speed ?? DEFAULT_SCATTER_SPEED,
+          color: MODEL_COLORS[selected.indexOf(m.id) % MODEL_COLORS.length]!,
+          provider: m.provider,
+        })),
     [selectedModels, selected],
   );
 
@@ -428,36 +440,36 @@ const LLMCompare = () => {
                         {fmt(m.context)}
                       </td>
                       <td
-                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.input === bestValues['input'] ? 'text-metric-best font-semibold' : ''}`}
+                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.input !== null && m.input === bestValues['input'] ? 'text-metric-best font-semibold' : ''}`}
                       >
                         {fmtPrice(m.input)}
                       </td>
                       <td
-                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.output === bestValues['output'] ? 'text-metric-best font-semibold' : ''}`}
+                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.output !== null && m.output === bestValues['output'] ? 'text-metric-best font-semibold' : ''}`}
                       >
                         {fmtPrice(m.output)}
                       </td>
                       <td
-                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.speed === bestValues['speed'] ? 'text-metric-best font-semibold' : ''}`}
+                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.speed !== null && m.speed === bestValues['speed'] ? 'text-metric-best font-semibold' : ''}`}
                       >
-                        {m.speed} t/s
+                        {m.speed !== null ? `${m.speed} t/s` : NA}
                       </td>
                       <td
-                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.latency === bestValues['latency'] ? 'text-metric-best font-semibold' : ''}`}
+                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${m.latency !== null && m.latency === bestValues['latency'] ? 'text-metric-best font-semibold' : ''}`}
                       >
-                        {m.latency}s
+                        {m.latency !== null ? `${m.latency}s` : NA}
                       </td>
                       <td
-                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap font-semibold ${m.quality === bestValues['quality'] ? 'text-metric-best' : ''}`}
+                        className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap font-semibold ${m.quality !== null && m.quality === bestValues['quality'] ? 'text-metric-best' : ''}`}
                       >
-                        {m.quality}
+                        {m.quality !== null ? m.quality : NA}
                       </td>
                       {BENCHMARKS.map((b) => (
                         <td
                           key={b}
-                          className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${(m[b] as number) === bestValues[b] ? 'text-metric-best font-semibold' : ''}`}
+                          className={`px-3 py-2.5 text-right text-[13px] whitespace-nowrap ${(m[b] as number | null) !== null && (m[b] as number) === bestValues[b] ? 'text-metric-best font-semibold' : ''}`}
                         >
-                          {(m[b] as number | null) ?? '—'}
+                          {(m[b] as number | null) !== null ? (m[b] as number) : NA}
                         </td>
                       ))}
                     </tr>
@@ -970,7 +982,7 @@ const LLMCompare = () => {
                             {fmtPrice(m.output)}
                           </td>
                           <td className="px-3 py-2 text-right text-[12px] whitespace-nowrap">
-                            {m.quality}
+                            {m.quality !== null ? m.quality : NA}
                           </td>
                         </tr>
                       );
@@ -986,6 +998,9 @@ const LLMCompare = () => {
             </>
           )}
         </div>
+      </div>
+      <div className="px-6 py-3 border-t border-border-light text-center text-[11px] text-text-dim shrink-0">
+        Data last updated: {DATA_LAST_UPDATED}
       </div>
     </div>
   );

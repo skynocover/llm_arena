@@ -82,8 +82,10 @@ export const fmt = (n: number): string => {
   return n.toString();
 };
 
+export const NA = 'N/A';
+
 export const fmtPrice = (n: number | null): string =>
-  n === null ? '—' : n < 0.01 ? '<$0.01' : '$' + n.toFixed(2);
+  n === null ? NA : n < 0.01 ? '<$0.01' : '$' + n.toFixed(2);
 
 export const DATA_SOURCES: Record<SortableField, { source: string; desc: string }> = {
   context: { source: 'OpenRouter', desc: 'Max context window length' },
@@ -115,12 +117,16 @@ export const OPEN_SOURCE_IDS = new Set<string>([
   'mistrallarge3',
   'mistralmedium31',
   'mistralsmall3',
+  'ministral314b',
   'devstral2',
   'phi4',
   'gemma327b',
   'glm5',
   'glm47flash',
+  'qwen35122b',
   'gptoss20b',
 ]);
 
 export const DEFAULT_SELECTED: string[] = ['gpt5', 'opus46', 'gemini31pro', 'grok4'];
+
+export const DATA_LAST_UPDATED = '2026-03-05';
