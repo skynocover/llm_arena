@@ -1,5 +1,27 @@
 [
   {
+    "id": "gpt54",
+    "openrouterId": "openai/gpt-5.4",
+    "name": "GPT-5.4",
+    "provider": "OpenAI",
+    "providerColor": "#10a37f",
+    "input": 2.5,
+    "output": 15.0,
+    "cached": 0.625,
+    "context": 1050000,
+    "maxOutput": 128000,
+    "speed": 73,
+    "latency": 185.0,
+    "coding": 72.5,
+    "mmlu": 91.0,
+    "gpqa": 84.2,
+    "math": 88.6,
+    "swe": 77.2,
+    "aime": 100.0,
+    "quality": 57,
+    "tier": "frontier"
+  },
+  {
     "id": "gpt5",
     "openrouterId": "openai/gpt-5",
     "name": "GPT-5",
