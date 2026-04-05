@@ -125,8 +125,10 @@ export const OPEN_SOURCE_IDS = new Set<string>([
   'glm47flash',
   'qwen35122b',
   'gptoss20b',
+  'gemma431b',
+  'gemma426b',
 ]);
 
 export const DEFAULT_SELECTED: string[] = ['gpt5', 'opus46', 'gemini31pro', 'grok4'];
 
-export const DATA_LAST_UPDATED = '2026-03-05';
+export const DATA_LAST_UPDATED = '2026-04-04';
