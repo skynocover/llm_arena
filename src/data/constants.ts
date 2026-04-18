@@ -2,7 +2,7 @@ import type { BenchmarkKey, Preset, SortableField, TierInfo, TierKey } from '../
 import MODELS from './models.json';
 
 export const PRESETS: Preset[] = [
-  { label: '🏆 Frontier Battle', ids: ['gpt5', 'opus46', 'gemini31pro', 'glm5'] },
+  { label: '🏆 Frontier Battle', ids: ['gpt54', 'opus47', 'gemini31pro', 'glm5'] },
   {
     label: '💰 Best Value',
     ids: ['kimik25', 'minimaxm25', 'doubao20pro', 'deepseekv3'],
@@ -112,6 +112,8 @@ export const OPEN_SOURCE_IDS = new Set<string>([
   'qwen3235b',
   'qwen35flash',
   'qwen3coder',
+  'qwen36plus',
+  'qwen3635b',
   'llama4maverick',
   'llama4scout',
   'mistrallarge3',
@@ -129,6 +131,6 @@ export const OPEN_SOURCE_IDS = new Set<string>([
   'gemma426b',
 ]);
 
-export const DEFAULT_SELECTED: string[] = ['gpt5', 'opus46', 'gemini31pro', 'grok4'];
+export const DEFAULT_SELECTED: string[] = ['gpt54', 'opus47', 'gemini31pro', 'grok420'];
 
-export const DATA_LAST_UPDATED = '2026-04-04';
+export const DATA_LAST_UPDATED = '2026-04-18';
