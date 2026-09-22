@@ -1,5 +1,71 @@
 [
   {
+    "id": "gpt6astra",
+    "openrouterId": "openai/gpt-6-astra",
+    "name": "GPT-6 Astra",
+    "provider": "OpenAI",
+    "providerColor": "#10a37f",
+    "input": 10.0,
+    "output": 50.0,
+    "cached": 1.0,
+    "context": 1050000,
+    "maxOutput": 128000,
+    "speed": 67,
+    "latency": 259.33,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": 96.0,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 53,
+    "tier": "frontier"
+  },
+  {
+    "id": "gpt56sol",
+    "openrouterId": "openai/gpt-5.6-sol",
+    "name": "GPT-5.6 Sol",
+    "provider": "OpenAI",
+    "providerColor": "#10a37f",
+    "input": 2.0,
+    "output": 10.0,
+    "cached": 0.2,
+    "context": 1050000,
+    "maxOutput": 128000,
+    "speed": 79,
+    "latency": 130.17,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": null,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 47,
+    "tier": "frontier"
+  },
+  {
+    "id": "gpt55",
+    "openrouterId": "openai/gpt-5.5",
+    "name": "GPT-5.5",
+    "provider": "OpenAI",
+    "providerColor": "#10a37f",
+    "input": 5.0,
+    "output": 30.0,
+    "cached": 0.5,
+    "context": 1050000,
+    "maxOutput": 128000,
+    "speed": 108,
+    "latency": 65.25,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": 93.6,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 38,
+    "tier": "frontier"
+  },
+  {
     "id": "gpt54",
     "openrouterId": "openai/gpt-5.4",
     "name": "GPT-5.4",
@@ -18,7 +84,7 @@
     "math": 88.6,
     "swe": 77.2,
     "aime": 100.0,
-    "quality": 57,
+    "quality": 39.0,
     "tier": "frontier"
   },
   {
@@ -40,7 +106,73 @@
     "math": 96.0,
     "swe": 80.0,
     "aime": 100.0,
-    "quality": 45,
+    "quality": 23.0,
+    "tier": "frontier"
+  },
+  {
+    "id": "fable51",
+    "openrouterId": "anthropic/claude-fable-5.1",
+    "name": "Claude Fable 5.1",
+    "provider": "Anthropic",
+    "providerColor": "#d97706",
+    "input": 10.0,
+    "output": 50.0,
+    "cached": 0.25,
+    "context": 1000000,
+    "maxOutput": 128000,
+    "speed": 66,
+    "latency": 298.45,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": null,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 53,
+    "tier": "frontier"
+  },
+  {
+    "id": "opus5",
+    "openrouterId": "anthropic/claude-opus-5",
+    "name": "Claude Opus 5",
+    "provider": "Anthropic",
+    "providerColor": "#d97706",
+    "input": 5.0,
+    "output": 25.0,
+    "cached": 0.5,
+    "context": 1000000,
+    "maxOutput": 128000,
+    "speed": 56,
+    "latency": 49.25,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": null,
+    "math": null,
+    "swe": 96.0,
+    "aime": null,
+    "quality": 51,
+    "tier": "frontier"
+  },
+  {
+    "id": "opus48",
+    "openrouterId": "anthropic/claude-opus-4.8",
+    "name": "Claude Opus 4.8",
+    "provider": "Anthropic",
+    "providerColor": "#d97706",
+    "input": 5.0,
+    "output": 25.0,
+    "cached": 0.5,
+    "context": 1000000,
+    "maxOutput": 128000,
+    "speed": 57,
+    "latency": 34.59,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": 93.6,
+    "math": null,
+    "swe": 88.6,
+    "aime": null,
+    "quality": 42,
     "tier": "frontier"
   },
   {
@@ -62,7 +194,7 @@
     "math": null,
     "swe": 87.6,
     "aime": null,
-    "quality": 57,
+    "quality": 41.0,
     "tier": "frontier"
   },
   {
@@ -84,7 +216,7 @@
     "math": 97.6,
     "swe": 80.8,
     "aime": 100.0,
-    "quality": 46,
+    "quality": 26.0,
     "tier": "frontier"
   },
   {
@@ -106,7 +238,51 @@
     "math": 96.8,
     "swe": 80.6,
     "aime": 97.0,
-    "quality": 57,
+    "quality": 30.0,
+    "tier": "frontier"
+  },
+  {
+    "id": "grok47",
+    "openrouterId": "x-ai/grok-4.7",
+    "name": "Grok 4.7",
+    "provider": "xAI",
+    "providerColor": "#a1a1aa",
+    "input": 1.6,
+    "output": 4.8,
+    "cached": 0.4,
+    "context": 500000,
+    "maxOutput": 450000,
+    "speed": 39,
+    "latency": 0.87,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": null,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 46,
+    "tier": "frontier"
+  },
+  {
+    "id": "grok46",
+    "openrouterId": "x-ai/grok-4.6",
+    "name": "Grok 4.6",
+    "provider": "xAI",
+    "providerColor": "#a1a1aa",
+    "input": 2.0,
+    "output": 6.0,
+    "cached": 0.5,
+    "context": 500000,
+    "maxOutput": 450000,
+    "speed": 60,
+    "latency": 42.79,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": null,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 44,
     "tier": "frontier"
   },
   {
@@ -128,7 +304,7 @@
     "math": null,
     "swe": null,
     "aime": null,
-    "quality": 49,
+    "quality": 26.0,
     "tier": "frontier"
   },
   {
@@ -150,7 +326,29 @@
     "math": 90.0,
     "swe": 72.0,
     "aime": 88.0,
-    "quality": 42,
+    "quality": 22.0,
+    "tier": "frontier"
+  },
+  {
+    "id": "glm53",
+    "openrouterId": "z-ai/glm-5.3",
+    "name": "GLM 5.3",
+    "provider": "Zhipu AI",
+    "providerColor": "#06b6d4",
+    "input": 0.7,
+    "output": 2.2,
+    "cached": 0.13,
+    "context": 1310720,
+    "maxOutput": 131072,
+    "speed": 57,
+    "latency": 3.14,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": null,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 45,
     "tier": "frontier"
   },
   {
@@ -172,7 +370,29 @@
     "math": 98.0,
     "swe": 77.8,
     "aime": 92.7,
-    "quality": 50,
+    "quality": 28.0,
+    "tier": "frontier"
+  },
+  {
+    "id": "kimik3",
+    "openrouterId": "moonshotai/kimi-k3",
+    "name": "Kimi K3",
+    "provider": "Moonshot",
+    "providerColor": "#8b5cf6",
+    "input": 3.0,
+    "output": 15.0,
+    "cached": 0.3,
+    "context": 1048576,
+    "maxOutput": 943718,
+    "speed": 43,
+    "latency": 3.98,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": 93.5,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 44,
     "tier": "frontier"
   },
   {
@@ -194,7 +414,7 @@
     "math": 98.0,
     "swe": 76.8,
     "aime": 96.1,
-    "quality": 47,
+    "quality": 23.0,
     "tier": "frontier"
   },
   {
@@ -216,7 +436,7 @@
     "math": 92.0,
     "swe": 80.2,
     "aime": 86.3,
-    "quality": 42,
+    "quality": 23.0,
     "tier": "frontier"
   },
   {
@@ -238,7 +458,7 @@
     "math": null,
     "swe": 78.0,
     "aime": null,
-    "quality": 50,
+    "quality": 23.0,
     "tier": "frontier"
   },
   {
@@ -260,7 +480,7 @@
     "math": 96.0,
     "swe": 76.5,
     "aime": 98.3,
-    "quality": 44,
+    "quality": null,
     "tier": "frontier"
   },
   {
@@ -282,7 +502,7 @@
     "math": 99.2,
     "swe": 69.1,
     "aime": 88.9,
-    "quality": 38,
+    "quality": 20.0,
     "tier": "frontier"
   },
   {
@@ -304,7 +524,7 @@
     "math": 99.4,
     "swe": 80.0,
     "aime": 94.0,
-    "quality": 54,
+    "quality": 33.0,
     "tier": "frontier"
   },
   {
@@ -326,7 +546,7 @@
     "math": 97.3,
     "swe": 63.8,
     "aime": 86.7,
-    "quality": 35,
+    "quality": 16.0,
     "tier": "frontier"
   },
   {
@@ -348,7 +568,29 @@
     "math": 85.0,
     "swe": 80.9,
     "aime": 91.0,
-    "quality": 43,
+    "quality": 24.0,
+    "tier": "frontier"
+  },
+  {
+    "id": "deepseekv4pro",
+    "openrouterId": "deepseek/deepseek-v4-pro-0813",
+    "name": "DeepSeek V4 Pro",
+    "provider": "DeepSeek",
+    "providerColor": "#6366f1",
+    "input": 1.32,
+    "output": 3.96,
+    "cached": 0.04,
+    "context": 1048576,
+    "maxOutput": 384000,
+    "speed": 97,
+    "latency": 1.62,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": null,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 36,
     "tier": "frontier"
   },
   {
@@ -370,7 +612,29 @@
     "math": 96.0,
     "swe": 73.1,
     "aime": 96.0,
-    "quality": 34,
+    "quality": 14.0,
+    "tier": "frontier"
+  },
+  {
+    "id": "qwen38max",
+    "openrouterId": "qwen/qwen3.8-max-0902",
+    "name": "Qwen3.8 Max",
+    "provider": "Qwen",
+    "providerColor": "#e11d48",
+    "input": 2.0,
+    "output": 6.0,
+    "cached": 0.25,
+    "context": 1000000,
+    "maxOutput": 131072,
+    "speed": 39,
+    "latency": 2.94,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": null,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 45,
     "tier": "frontier"
   },
   {
@@ -392,7 +656,7 @@
     "math": 74.1,
     "swe": 76.4,
     "aime": 91.3,
-    "quality": 45,
+    "quality": 18,
     "tier": "frontier"
   },
   {
@@ -414,7 +678,7 @@
     "math": null,
     "swe": 78.8,
     "aime": null,
-    "quality": 50,
+    "quality": 27.0,
     "tier": "frontier"
   },
   {
@@ -436,10 +700,53 @@
     "math": 95.2,
     "swe": 69.6,
     "aime": 100.0,
-    "quality": 40,
+    "quality": 21.0,
     "tier": "frontier"
   },
-
+  {
+    "id": "musespark13",
+    "openrouterId": "meta/muse-spark-1.3",
+    "name": "Muse Spark 1.3",
+    "provider": "Meta",
+    "providerColor": "#0668E1",
+    "input": 1.25,
+    "output": 4.25,
+    "cached": 0.15,
+    "context": 1048576,
+    "maxOutput": 943718,
+    "speed": 223,
+    "latency": 20.69,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": 94.0,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 48,
+    "tier": "frontier"
+  },
+  {
+    "id": "sonnet5",
+    "openrouterId": "anthropic/claude-sonnet-5",
+    "name": "Claude Sonnet 5",
+    "provider": "Anthropic",
+    "providerColor": "#d97706",
+    "input": 2.0,
+    "output": 10.0,
+    "cached": 0.2,
+    "context": 1000000,
+    "maxOutput": 128000,
+    "speed": 77,
+    "latency": 142.9,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": null,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 38,
+    "tier": "mid"
+  },
   {
     "id": "sonnet46",
     "openrouterId": "anthropic/claude-sonnet-4.6",
@@ -459,7 +766,29 @@
     "math": 97.8,
     "swe": 79.6,
     "aime": 83.0,
-    "quality": 44,
+    "quality": 25.0,
+    "tier": "mid"
+  },
+  {
+    "id": "gpt56terra",
+    "openrouterId": "openai/gpt-5.6-terra",
+    "name": "GPT-5.6 Terra",
+    "provider": "OpenAI",
+    "providerColor": "#10a37f",
+    "input": 2.0,
+    "output": 12.0,
+    "cached": 0.2,
+    "context": 1050000,
+    "maxOutput": 128000,
+    "speed": 107,
+    "latency": 223.75,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": null,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 42,
     "tier": "mid"
   },
   {
@@ -481,7 +810,7 @@
     "math": 85.6,
     "swe": 42.1,
     "aime": 60.3,
-    "quality": 26,
+    "quality": 13.0,
     "tier": "mid"
   },
   {
@@ -503,7 +832,7 @@
     "math": 96.0,
     "swe": 65.0,
     "aime": 92.0,
-    "quality": 32,
+    "quality": 8.0,
     "tier": "mid"
   },
   {
@@ -525,7 +854,7 @@
     "math": 92.0,
     "swe": 45.6,
     "aime": 85.0,
-    "quality": 27,
+    "quality": 13.0,
     "tier": "mid"
   },
   {
@@ -547,7 +876,29 @@
     "math": 88.0,
     "swe": 40.0,
     "aime": 68.0,
-    "quality": 17,
+    "quality": 12,
+    "tier": "mid"
+  },
+  {
+    "id": "mistralmedium35",
+    "openrouterId": "mistralai/mistral-medium-3-5",
+    "name": "Mistral Medium 3.5",
+    "provider": "Mistral AI",
+    "providerColor": "#f97316",
+    "input": 1.5,
+    "output": 7.5,
+    "cached": null,
+    "context": 262144,
+    "maxOutput": 209715,
+    "speed": 137,
+    "latency": 2.26,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": null,
+    "math": null,
+    "swe": 77.6,
+    "aime": null,
+    "quality": 14,
     "tier": "mid"
   },
   {
@@ -569,7 +920,7 @@
     "math": 80.0,
     "swe": 35.0,
     "aime": 55.0,
-    "quality": 23,
+    "quality": 9.0,
     "tier": "mid"
   },
   {
@@ -591,7 +942,29 @@
     "math": 82.0,
     "swe": 70.3,
     "aime": 62.0,
-    "quality": 18,
+    "quality": 10.0,
+    "tier": "mid"
+  },
+  {
+    "id": "gemini38flash",
+    "openrouterId": "google/gemini-3.8-flash",
+    "name": "Gemini 3.8 Flash",
+    "provider": "Google",
+    "providerColor": "#4285f4",
+    "input": 0.75,
+    "output": 3.75,
+    "cached": 0.07,
+    "context": 1048576,
+    "maxOutput": 65536,
+    "speed": 329,
+    "latency": 15.01,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": null,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 41,
     "tier": "mid"
   },
   {
@@ -613,7 +986,7 @@
     "math": 92.0,
     "swe": 78.0,
     "aime": 82.0,
-    "quality": 35,
+    "quality": 18.0,
     "tier": "mid"
   },
   {
@@ -635,7 +1008,7 @@
     "math": 97.0,
     "swe": 68.1,
     "aime": 92.7,
-    "quality": 33,
+    "quality": 17.0,
     "tier": "mid"
   },
   {
@@ -657,7 +1030,7 @@
     "math": null,
     "swe": null,
     "aime": null,
-    "quality": 49,
+    "quality": 24.0,
     "tier": "mid"
   },
   {
@@ -679,7 +1052,7 @@
     "math": 94.8,
     "swe": 55.0,
     "aime": 90.8,
-    "quality": 41,
+    "quality": 17.0,
     "tier": "mid"
   },
   {
@@ -701,7 +1074,29 @@
     "math": 82.0,
     "swe": 23.6,
     "aime": 49.6,
-    "quality": 23,
+    "quality": 10.0,
+    "tier": "mid"
+  },
+  {
+    "id": "grok43",
+    "openrouterId": "x-ai/grok-4.3",
+    "name": "Grok 4.3",
+    "provider": "xAI",
+    "providerColor": "#a1a1aa",
+    "input": 1.25,
+    "output": 2.5,
+    "cached": 0.2,
+    "context": 1000000,
+    "maxOutput": 900000,
+    "speed": 108,
+    "latency": 24.41,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": null,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 25,
     "tier": "mid"
   },
   {
@@ -723,7 +1118,7 @@
     "math": 82.0,
     "swe": 50.0,
     "aime": 65.0,
-    "quality": 24,
+    "quality": 11.0,
     "tier": "mid"
   },
   {
@@ -745,7 +1140,7 @@
     "math": 80.0,
     "swe": 70.8,
     "aime": 70.0,
-    "quality": 29,
+    "quality": 14.0,
     "tier": "mid"
   },
   {
@@ -767,7 +1162,7 @@
     "math": 87.0,
     "swe": 77.2,
     "aime": 87.0,
-    "quality": 37,
+    "quality": 19.0,
     "tier": "mid"
   },
   {
@@ -789,7 +1184,7 @@
     "math": 97.3,
     "swe": 57.6,
     "aime": 87.5,
-    "quality": 27,
+    "quality": 13,
     "tier": "mid"
   },
   {
@@ -811,7 +1206,29 @@
     "math": 80.0,
     "swe": 72.2,
     "aime": 55.0,
-    "quality": 22,
+    "quality": 9.0,
+    "tier": "mid"
+  },
+  {
+    "id": "kimik26",
+    "openrouterId": "moonshotai/kimi-k2.6",
+    "name": "Kimi K2.6",
+    "provider": "Moonshot",
+    "providerColor": "#8b5cf6",
+    "input": 0.95,
+    "output": 4.0,
+    "cached": 0.16,
+    "context": 262144,
+    "maxOutput": 235929,
+    "speed": 35,
+    "latency": 2.98,
+    "coding": 89.6,
+    "mmlu": null,
+    "gpqa": 90.5,
+    "math": null,
+    "swe": 80.2,
+    "aime": null,
+    "quality": 27,
     "tier": "mid"
   },
   {
@@ -833,7 +1250,29 @@
     "math": 97.0,
     "swe": 71.3,
     "aime": 94.5,
-    "quality": 41,
+    "quality": 22.0,
+    "tier": "mid"
+  },
+  {
+    "id": "minimaxm3",
+    "openrouterId": "minimax/minimax-m3",
+    "name": "MiniMax M3",
+    "provider": "MiniMax",
+    "providerColor": "#ec4899",
+    "input": 0.3,
+    "output": 1.2,
+    "cached": 0.06,
+    "context": 1048576,
+    "maxOutput": 512000,
+    "speed": 169,
+    "latency": 0.88,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": null,
+    "math": null,
+    "swe": 80.5,
+    "aime": null,
+    "quality": 29,
     "tier": "mid"
   },
   {
@@ -855,7 +1294,7 @@
     "math": 96.8,
     "swe": 56.0,
     "aime": 76.9,
-    "quality": 24,
+    "quality": 12.0,
     "tier": "mid"
   },
   {
@@ -899,7 +1338,7 @@
     "math": null,
     "swe": 72.0,
     "aime": null,
-    "quality": 42,
+    "quality": 16,
     "tier": "mid"
   },
   {
@@ -921,7 +1360,7 @@
     "math": null,
     "swe": 73.4,
     "aime": 92.7,
-    "quality": 43,
+    "quality": 18,
     "tier": "mid"
   },
   {
@@ -943,10 +1382,31 @@
     "math": 91.0,
     "swe": 45.0,
     "aime": 50.0,
-    "quality": 21,
+    "quality": 9.0,
     "tier": "mid"
   },
-
+  {
+    "id": "glm53flash",
+    "openrouterId": "z-ai/glm-5.3-flash",
+    "name": "GLM 5.3 Flash",
+    "provider": "Zhipu AI",
+    "providerColor": "#06b6d4",
+    "input": 0.15,
+    "output": 0.5,
+    "cached": 0.05,
+    "context": 1310720,
+    "maxOutput": 943718,
+    "speed": 89,
+    "latency": 2.58,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": null,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 42,
+    "tier": "mid"
+  },
   {
     "id": "haiku45",
     "openrouterId": "anthropic/claude-haiku-4.5",
@@ -966,7 +1426,29 @@
     "math": 72.0,
     "swe": 25.0,
     "aime": 42.0,
-    "quality": 31,
+    "quality": 15.0,
+    "tier": "budget"
+  },
+  {
+    "id": "gpt56luna",
+    "openrouterId": "openai/gpt-5.6-luna",
+    "name": "GPT-5.6 Luna",
+    "provider": "OpenAI",
+    "providerColor": "#10a37f",
+    "input": 0.2,
+    "output": 1.2,
+    "cached": 0.02,
+    "context": 1050000,
+    "maxOutput": 128000,
+    "speed": 159,
+    "latency": 123.28,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": 92.3,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 37,
     "tier": "budget"
   },
   {
@@ -988,7 +1470,7 @@
     "math": 70.0,
     "swe": 18.0,
     "aime": 32.0,
-    "quality": 13,
+    "quality": 7.0,
     "tier": "budget"
   },
   {
@@ -1010,7 +1492,29 @@
     "math": 82.0,
     "swe": 30.0,
     "aime": 55.0,
-    "quality": 24,
+    "quality": 9.0,
+    "tier": "budget"
+  },
+  {
+    "id": "gemini35flashlite",
+    "openrouterId": "google/gemini-3.5-flash-lite",
+    "name": "Gemini 3.5 Flash Lite",
+    "provider": "Google",
+    "providerColor": "#4285f4",
+    "input": 0.3,
+    "output": 2.5,
+    "cached": 0.03,
+    "context": 1048576,
+    "maxOutput": 65536,
+    "speed": 386,
+    "latency": 11.56,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": null,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 22,
     "tier": "budget"
   },
   {
@@ -1032,7 +1536,7 @@
     "math": 82.0,
     "swe": 35.0,
     "aime": 58.0,
-    "quality": 21,
+    "quality": 10.0,
     "tier": "budget"
   },
   {
@@ -1054,7 +1558,7 @@
     "math": 78.0,
     "swe": 28.0,
     "aime": 48.0,
-    "quality": 14,
+    "quality": 8.0,
     "tier": "budget"
   },
   {
@@ -1076,7 +1580,7 @@
     "math": 80.4,
     "swe": 15.0,
     "aime": 40.0,
-    "quality": 10,
+    "quality": 6.0,
     "tier": "budget"
   },
   {
@@ -1098,7 +1602,7 @@
     "math": null,
     "swe": null,
     "aime": 88.3,
-    "quality": 31,
+    "quality": 17,
     "tier": "budget"
   },
   {
@@ -1120,7 +1624,7 @@
     "math": null,
     "swe": null,
     "aime": 89.2,
-    "quality": 39,
+    "quality": 19.0,
     "tier": "budget"
   },
   {
@@ -1142,7 +1646,7 @@
     "math": 69.0,
     "swe": 20.0,
     "aime": 35.0,
-    "quality": 10,
+    "quality": 5.0,
     "tier": "budget"
   },
   {
@@ -1164,7 +1668,7 @@
     "math": 70.6,
     "swe": 22.0,
     "aime": 35.0,
-    "quality": 13,
+    "quality": 7.0,
     "tier": "budget"
   },
   {
@@ -1186,7 +1690,7 @@
     "math": null,
     "swe": null,
     "aime": null,
-    "quality": 44,
+    "quality": 21.0,
     "tier": "budget"
   },
   {
@@ -1208,7 +1712,7 @@
     "math": 85.0,
     "swe": 30.0,
     "aime": 60.0,
-    "quality": 27,
+    "quality": 13.0,
     "tier": "budget"
   },
   {
@@ -1230,7 +1734,7 @@
     "math": 70.0,
     "swe": 10.0,
     "aime": 29.4,
-    "quality": 13,
+    "quality": 8.0,
     "tier": "budget"
   },
   {
@@ -1252,7 +1756,7 @@
     "math": 55.0,
     "swe": 31.6,
     "aime": 49.8,
-    "quality": 13,
+    "quality": 7.0,
     "tier": "budget"
   },
   {
@@ -1274,7 +1778,7 @@
     "math": null,
     "swe": null,
     "aime": null,
-    "quality": 16,
+    "quality": 6.0,
     "tier": "budget"
   },
   {
@@ -1296,7 +1800,7 @@
     "math": null,
     "swe": null,
     "aime": null,
-    "quality": 34,
+    "quality": 16.0,
     "tier": "budget"
   },
   {
@@ -1318,7 +1822,29 @@
     "math": 94.2,
     "swe": 45.0,
     "aime": 85.0,
-    "quality": 32,
+    "quality": 15.0,
+    "tier": "budget"
+  },
+  {
+    "id": "qwen3827b",
+    "openrouterId": "qwen/qwen3.8-27b",
+    "name": "Qwen3.8 27B",
+    "provider": "Qwen",
+    "providerColor": "#e11d48",
+    "input": 0.42,
+    "output": 3.0,
+    "cached": 0.08,
+    "context": 1000000,
+    "maxOutput": 131072,
+    "speed": 45,
+    "latency": 3.94,
+    "coding": 90.3,
+    "mmlu": null,
+    "gpqa": 89.2,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 34,
     "tier": "budget"
   },
   {
@@ -1340,7 +1866,7 @@
     "math": 82.0,
     "swe": 69.2,
     "aime": 82.0,
-    "quality": 37,
+    "quality": null,
     "tier": "budget"
   },
   {
@@ -1362,7 +1888,7 @@
     "math": 83.5,
     "swe": 70.6,
     "aime": 89.2,
-    "quality": 28,
+    "quality": 9.0,
     "tier": "budget"
   },
   {
@@ -1384,7 +1910,7 @@
     "math": 95.0,
     "swe": 59.2,
     "aime": 91.6,
-    "quality": 30,
+    "quality": 15.0,
     "tier": "budget"
   },
   {
@@ -1406,7 +1932,29 @@
     "math": 95.0,
     "swe": 67.9,
     "aime": 87.0,
-    "quality": 35,
+    "quality": null,
+    "tier": "budget"
+  },
+  {
+    "id": "deepseekv41flash",
+    "openrouterId": "deepseek/deepseek-v4.1-flash",
+    "name": "DeepSeek V4.1 Flash",
+    "provider": "DeepSeek",
+    "providerColor": "#6366f1",
+    "input": 0.3,
+    "output": 1.2,
+    "cached": 0.01,
+    "context": 1048576,
+    "maxOutput": 384000,
+    "speed": 219,
+    "latency": 0.9,
+    "coding": null,
+    "mmlu": null,
+    "gpqa": 90.9,
+    "math": null,
+    "swe": null,
+    "aime": null,
+    "quality": 39,
     "tier": "budget"
   }
 ]

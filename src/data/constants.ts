@@ -2,22 +2,22 @@ import type { BenchmarkKey, Preset, SortableField, TierInfo, TierKey } from '../
 import MODELS from './models.json';
 
 export const PRESETS: Preset[] = [
-  { label: '🏆 Frontier Battle', ids: ['gpt54', 'opus47', 'gemini31pro', 'glm5'] },
+  { label: '🏆 Frontier Battle', ids: ['gpt6astra', 'fable51', 'gemini31pro', 'glm53'] },
   {
     label: '💰 Best Value',
-    ids: ['kimik25', 'minimaxm25', 'doubao20pro', 'deepseekv3'],
+    ids: ['kimik26', 'minimaxm3', 'deepseekv4pro', 'glm53flash'],
   },
   {
     label: '⚡ Budget Kings',
-    ids: ['gpt4omini', 'gemini25flash', 'gptoss20b', 'llama4scout', 'mistralsmall3'],
+    ids: ['gpt56luna', 'gemini35flashlite', 'deepseekv41flash', 'qwen3827b', 'gptoss20b'],
   },
   {
     label: '🧠 Coding Focus',
-    ids: ['kimik25', 'minimaxm25', 'glm5', 'opus46', 'gptoss20b'],
+    ids: ['opus5', 'minimaxm3', 'kimik26', 'glm53', 'qwen3827b'],
   },
   {
     label: '🇨🇳 vs 🇺🇸',
-    ids: ['glm5', 'kimik25', 'doubao20pro', 'gpt5', 'opus46', 'gemini31pro'],
+    ids: ['glm53', 'kimik3', 'deepseekv4pro', 'gpt6astra', 'opus5', 'gemini31pro'],
   },
 ];
 
@@ -129,8 +129,17 @@ export const OPEN_SOURCE_IDS = new Set<string>([
   'gptoss20b',
   'gemma431b',
   'gemma426b',
+  'mistralmedium35',
+  'deepseekv4pro',
+  'deepseekv41flash',
+  'qwen3827b',
+  'glm53',
+  'glm53flash',
+  'kimik3',
+  'kimik26',
+  'minimaxm3',
 ]);
 
-export const DEFAULT_SELECTED: string[] = ['gpt54', 'opus47', 'gemini31pro', 'grok420'];
+export const DEFAULT_SELECTED: string[] = ['gpt6astra', 'fable51', 'gemini31pro', 'grok47'];
 
-export const DATA_LAST_UPDATED = '2026-04-18';
+export const DATA_LAST_UPDATED = '2026-09-22';
